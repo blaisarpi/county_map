@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/filter.css">
+<link rel="stylesheet" href="css/nouislider.min.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/tailDT.js"></script>
+<script src="js/nouislider.min.js"></script>
+<script src="js/wNumb.js"></script>
+        <script src="data/UScounties_0.js"></script>
+        <script src="data/where_weve_been_1.js"></script>
+        <script src="data/USStates_2.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        })
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+            if (bounds_group.getLayers().length) {
+                map.fitBounds(bounds_group.getBounds());
+            }
+        }
+        function pop_UScounties_0(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NAME'] !== null ? autolinker.link(feature.properties['NAME'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['STATE_NAME'] !== null ? autolinker.link(feature.properties['STATE_NAME'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['STATE_FIPS'] !== null ? autolinker.link(feature.properties['STATE_FIPS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['CNTY_FIPS'] !== null ? autolinker.link(feature.properties['CNTY_FIPS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['FIPS'] !== null ? autolinker.link(feature.properties['FIPS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['FIPS_int'] !== null ? autolinker.link(feature.properties['FIPS_int'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_UScounties_0_0() {
+            return {
+                pane: 'pane_UScounties_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(182,180,178,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_UScounties_0');
+        map.getPane('pane_UScounties_0').style.zIndex = 400;
+        map.getPane('pane_UScounties_0').style['mix-blend-mode'] = 'normal';
+        var layer_UScounties_0 = new L.geoJson(json_UScounties_0, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_UScounties_0',
+            layerName: 'layer_UScounties_0',
+            pane: 'pane_UScounties_0',
+            onEachFeature: pop_UScounties_0,
+            style: style_UScounties_0_0,
+        });
+        bounds_group.addLayer(layer_UScounties_0);
+        map.addLayer(layer_UScounties_0);
+        function pop_where_weve_been_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NAME'] !== null ? autolinker.link(feature.properties['NAME'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['STATE_NAME'] !== null ? autolinker.link(feature.properties['STATE_NAME'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['STATE_FIPS'] !== null ? autolinker.link(feature.properties['STATE_FIPS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['CNTY_FIPS'] !== null ? autolinker.link(feature.properties['CNTY_FIPS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['FIPS'] !== null ? autolinker.link(feature.properties['FIPS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['FIPS_int'] !== null ? autolinker.link(feature.properties['FIPS_int'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['J'] !== null ? autolinker.link(feature.properties['J'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['M'] !== null ? autolinker.link(feature.properties['M'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['A'] !== null ? autolinker.link(feature.properties['A'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['T'] !== null ? autolinker.link(feature.properties['T'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['K'] !== null ? autolinker.link(feature.properties['K'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Combinatio'] !== null ? autolinker.link(feature.properties['Combinatio'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['County'] !== null ? autolinker.link(feature.properties['County'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['State'] !== null ? autolinker.link(feature.properties['State'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['FIPS_Code'] !== null ? autolinker.link(feature.properties['FIPS_Code'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Field10'] !== null ? autolinker.link(feature.properties['Field10'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_where_weve_been_1_0() {
+            return {
+                pane: 'pane_where_weve_been_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(145,82,45,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_where_weve_been_1');
+        map.getPane('pane_where_weve_been_1').style.zIndex = 401;
+        map.getPane('pane_where_weve_been_1').style['mix-blend-mode'] = 'normal';
+        var layer_where_weve_been_1 = new L.geoJson(json_where_weve_been_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_where_weve_been_1',
+            layerName: 'layer_where_weve_been_1',
+            pane: 'pane_where_weve_been_1',
+            onEachFeature: pop_where_weve_been_1,
+            style: style_where_weve_been_1_0,
+        });
+        bounds_group.addLayer(layer_where_weve_been_1);
+        map.addLayer(layer_where_weve_been_1);
+        function pop_USStates_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['STATEFP'] !== null ? autolinker.link(feature.properties['STATEFP'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['STATENS'] !== null ? autolinker.link(feature.properties['STATENS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['AFFGEOID'] !== null ? autolinker.link(feature.properties['AFFGEOID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['GEOID'] !== null ? autolinker.link(feature.properties['GEOID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['STUSPS'] !== null ? autolinker.link(feature.properties['STUSPS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NAME'] !== null ? autolinker.link(feature.properties['NAME'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['LSAD'] !== null ? autolinker.link(feature.properties['LSAD'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ALAND'] !== null ? autolinker.link(feature.properties['ALAND'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['AWATER'] !== null ? autolinker.link(feature.properties['AWATER'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_USStates_2_0() {
+            return {
+                pane: 'pane_USStates_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_USStates_2');
+        map.getPane('pane_USStates_2').style.zIndex = 402;
+        map.getPane('pane_USStates_2').style['mix-blend-mode'] = 'normal';
+        var layer_USStates_2 = new L.geoJson(json_USStates_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_USStates_2',
+            layerName: 'layer_USStates_2',
+            pane: 'pane_USStates_2',
+            onEachFeature: pop_USStates_2,
+            style: style_USStates_2_0,
+        });
+        bounds_group.addLayer(layer_USStates_2);
+        map.addLayer(layer_USStates_2);
+        map.on("zoomend", function(){
+
+                if (map.hasLayer(layer_where_weve_been_1)) {
+                    if (map.getZoom() <= 8 && map.getZoom() >= 16) {
+                        layer_where_weve_been_1.eachLayer(function (layer) {
+                            layer.openTooltip();
+                        });
+                    } else {
+                        layer_where_weve_been_1.eachLayer(function (layer) {
+                            layer.closeTooltip();
+                        });
+                    }
+                }
+        });
+        setBounds();
+                if (map.hasLayer(layer_where_weve_been_1)) {
+                    if (map.getZoom() <= 8 && map.getZoom() >= 16) {
+                        layer_where_weve_been_1.eachLayer(function (layer) {
+                            layer.openTooltip();
+                        });
+                    } else {
+                        layer_where_weve_been_1.eachLayer(function (layer) {
+                            layer.closeTooltip();
+                        });
+                    }
+                }
+        var mapDiv = document.getElementById('map');
+        var row = document.createElement('div');
+        row.className="row";
+        row.id="all";
+        row.style.height = "100%";
+        var col1 = document.createElement('div');
+        col1.className="col9";
+        col1.id = "mapWindow";
+        col1.style.height = "99%";
+        col1.style.width = "80%";
+        col1.style.display = "inline-block";
+        var col2 = document.createElement('div');
+        col2.className="col3";
+        col2.id = "menu";
+        col2.style.display = "inline-block";
+        mapDiv.parentNode.insertBefore(row, mapDiv);
+        document.getElementById("all").appendChild(col1);
+        document.getElementById("all").appendChild(col2);
+        col1.appendChild(mapDiv)
+        var Filters = {"Combinatio": "str"};
+        function filterFunc() {
+          map.eachLayer(function(lyr){
+          if ("options" in lyr && "dataVar" in lyr["options"]){
+            features = this[lyr["options"]["dataVar"]].features.slice(0);
+            try{
+              for (key in Filters){
+                keyS = key.replace(/[^a-zA-Z0-9_]/g, "")
+                if (Filters[key] == "str" || Filters[key] == "bool"){
+                  var selection = [];
+                  var options = document.getElementById("sel_" + keyS).options
+                  for (var i=0; i < options.length; i++) {
+                    if (options[i].selected) selection.push(options[i].value);
+                  }
+                    try{
+                      if (key in features[0].properties){
+                        for (i = features.length - 1;
+                          i >= 0; --i){
+                          if (selection.indexOf(
+                          features[i].properties[key])<0
+                          && selection.length>0) {
+                          features.splice(i,1);
+                          }
+                        }
+                      }
+                    } catch(err){
+                  }
+                }
+                if (Filters[key] == "int"){
+                  sliderVals =  document.getElementById(
+                    "div_" + keyS).noUiSlider.get();
+                  try{
+                    if (key in features[0].properties){
+                    for (i = features.length - 1; i >= 0; --i){
+                      if (parseInt(features[i].properties[key])
+                          < sliderVals[0]
+                          || parseInt(features[i].properties[key])
+                          > sliderVals[1]){
+                            features.splice(i,1);
+                          }
+                        }
+                      }
+                    } catch(err){
+                    }
+                  }
+                if (Filters[key] == "real"){
+                  sliderVals =  document.getElementById(
+                    "div_" + keyS).noUiSlider.get();
+                  try{
+                    if (key in features[0].properties){
+                    for (i = features.length - 1; i >= 0; --i){
+                      if (features[i].properties[key]
+                          < sliderVals[0]
+                          || features[i].properties[key]
+                          > sliderVals[1]){
+                            features.splice(i,1);
+                          }
+                        }
+                      }
+                    } catch(err){
+                    }
+                  }
+                if (Filters[key] == "date"
+                  || Filters[key] == "datetime"
+                  || Filters[key] == "time"){
+                  try{
+                    if (key in features[0].properties){
+                      HTMLkey = key.replace(/[&\/\\#,+()$~%.'":*?<>{} ]/g, '');
+                      startdate = document.getElementById("dat_" +
+                        HTMLkey + "_date1").value.replace(" ", "T");
+                      enddate = document.getElementById("dat_" +
+                        HTMLkey + "_date2").value.replace(" ", "T");
+                      for (i = features.length - 1; i >= 0; --i){
+                        if (features[i].properties[key] < startdate
+                          || features[i].properties[key] > enddate){
+                          features.splice(i,1);
+                        }
+                      }
+                    }
+                  } catch(err){
+                  }
+                }
+              }
+            } catch(err){
+            }
+          this[lyr["options"]["layerName"]].clearLayers();
+          this[lyr["options"]["layerName"]].addData(features);
+          }
+          })
+        }
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_Combinatio = document.createElement('div');
+            div_Combinatio.id = "div_Combinatio";
+            div_Combinatio.className= "filterselect";
+            document.getElementById("menu").appendChild(div_Combinatio);
+            sel_Combinatio = document.createElement('select');
+            sel_Combinatio.multiple = true;
+            sel_Combinatio.size = 10;
+            sel_Combinatio.id = "sel_Combinatio";
+            var Combinatio_options_str = "<option value='' unselected></option>";
+            sel_Combinatio.onchange = function(){filterFunc()};
+            Combinatio_options_str  += '<option value="NULL">NULL</option>';
+            Combinatio_options_str  += '<option value="A">A</option>';
+            Combinatio_options_str  += '<option value="AK">AK</option>';
+            Combinatio_options_str  += '<option value="AT">AT</option>';
+            Combinatio_options_str  += '<option value="ATK">ATK</option>';
+            Combinatio_options_str  += '<option value="J">J</option>';
+            Combinatio_options_str  += '<option value="JA">JA</option>';
+            Combinatio_options_str  += '<option value="JAK">JAK</option>';
+            Combinatio_options_str  += '<option value="JAT">JAT</option>';
+            Combinatio_options_str  += '<option value="JATK">JATK</option>';
+            Combinatio_options_str  += '<option value="JK">JK</option>';
+            Combinatio_options_str  += '<option value="JM">JM</option>';
+            Combinatio_options_str  += '<option value="JMA">JMA</option>';
+            Combinatio_options_str  += '<option value="JMAK">JMAK</option>';
+            Combinatio_options_str  += '<option value="JMAT">JMAT</option>';
+            Combinatio_options_str  += '<option value="JMATK">JMATK</option>';
+            Combinatio_options_str  += '<option value="JMK">JMK</option>';
+            Combinatio_options_str  += '<option value="JMT">JMT</option>';
+            Combinatio_options_str  += '<option value="JMTK">JMTK</option>';
+            Combinatio_options_str  += '<option value="JT">JT</option>';
+            Combinatio_options_str  += '<option value="JTK">JTK</option>';
+            Combinatio_options_str  += '<option value="K">K</option>';
+            Combinatio_options_str  += '<option value="M">M</option>';
+            Combinatio_options_str  += '<option value="MA">MA</option>';
+            Combinatio_options_str  += '<option value="MAK">MAK</option>';
+            Combinatio_options_str  += '<option value="MAT">MAT</option>';
+            Combinatio_options_str  += '<option value="MATK">MATK</option>';
+            Combinatio_options_str  += '<option value="MK">MK</option>';
+            Combinatio_options_str  += '<option value="MT">MT</option>';
+            Combinatio_options_str  += '<option value="MTK">MTK</option>';
+            Combinatio_options_str  += '<option value="T">T</option>';
+            Combinatio_options_str  += '<option value="TK">TK</option>';
+            sel_Combinatio.innerHTML = Combinatio_options_str;
+            div_Combinatio.appendChild(sel_Combinatio);
+            var lab_Combinatio = document.createElement('div');
+            lab_Combinatio.innerHTML = 'Combinatio';
+            lab_Combinatio.className = 'filterlabel';
+            div_Combinatio.appendChild(lab_Combinatio);
+            var reset_Combinatio = document.createElement('div');
+            reset_Combinatio.innerHTML = 'clear filter';
+            reset_Combinatio.className = 'filterlabel';
+            reset_Combinatio.onclick = function() {
+                var options = document.getElementById("sel_Combinatio").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_Combinatio.appendChild(reset_Combinatio);
+        resetLabels([layer_where_weve_been_1]);
+        map.on("zoomend", function(){
+            resetLabels([layer_where_weve_been_1]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_where_weve_been_1]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_where_weve_been_1]);
+        });
+        </script>
+    </body>
+</html>
